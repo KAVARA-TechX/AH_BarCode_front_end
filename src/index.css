@@ -1,0 +1,42 @@
+body{
+  background: #FDF6D8;
+  overflow-x:hidden;
+  height: 100%;
+  background-image:url('./Images/bgpattern.png');
+}
+
+/* Logo Section */
+
+.logoImg{
+  width: 98px;
+  height: 98px;
+  margin:25px;
+}
+
+.button{
+background: none;
+border: 1px solid #8F774A;
+color: #8F774A;
+border-radius: 6px;
+padding: 6px 18px;
+width: 180px;
+transition: width 1s;
+}
+
+.button a:hover{
+  text-decoration: none;
+}
+.button:hover{
+  background-color: #0E2D1C;
+  color: #FDF6D8;
+  width: 200px;
+}
+
+input{
+  background: none !important;
+  border: 1px solid black !important;
+}
+
+label{
+  font-weight: bold;
+}
