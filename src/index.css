@@ -13,6 +13,8 @@ body{
   margin:25px;
 }
 
+/* Form Style */
+
 .button{
 background: none;
 border: 1px solid #8F774A;
@@ -39,4 +41,9 @@ input{
 
 label{
   font-weight: bold;
+}
+
+select{
+  background: none !important;
+  border: 1px solid #000 !important;
 }

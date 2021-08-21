@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
+import B2bUser from '../Forms/B2bUser';
 
 const ExistingUser = () =>{
-    const [email,setEmail] = useState('');
-    const onHandleSubmit = (e) =>{
-        e.preventDefault();
-        console.log(email);
-        setEmail('');
-    }
+    const [email,setEmail] = useState("");
+    const [pwd,setPwd] = useState("");
+    const [select,setSelect] = useState("");
     return(
         <div >
             <h3 style={{color:'a7a936'}} className="text-center">Existing User</h3>
@@ -16,14 +14,38 @@ const ExistingUser = () =>{
 
                     </div>
                     <div className="col-md-4">
-                    <form onSubmit={onHandleSubmit}>
-                        <label>Email:-</label>
-                        <input className="form-control"
-                        value={email}
-                        onChange={e=>setEmail(e.target.value)}
-                        placeholder="Enter client Email..."/>
-                        <button className="button mt-3">Login</button>
-                    </form>
+                    <label>User Type</label>
+                        <select className="form-control" aria-label="Default select example"
+                        onChange={(e)=>{
+                            setSelect(e.target.value);
+                        }}
+                        >
+                                <option >Choose the User Type</option>
+                                <option value="B2B">B2B User</option>
+                                <option value="Retail">Retail User</option>
+                            </select>
+
+                            {select === "B2B" ?
+                            <B2bUser/>
+                            :
+                            select === "Retail" ? 
+                                <form>
+                                <label>Email address</label>
+                            <input className="form-control"
+                            value={email} 
+                            onChange={e=>setEmail(e.target.value)}
+                            placeholder="email@address.com" />
+                            <label>Password</label>
+                            <input className="form-control"
+                            value={pwd} 
+                            onChange={e=>setPwd(e.target.value)}
+                            placeholder="xxxxxxxxx" />
+                            <button className="button mt-3">Login</button>
+                            </form>
+                            :
+                            ""
+                        }
+                        
                     </div>
                     <div className="col-md-4">
                     </div>
