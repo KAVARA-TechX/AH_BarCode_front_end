@@ -15,7 +15,7 @@ const ExistingUser = () =>{
                     </div>
                     <div className="col-md-4">
                     <label>User Type</label>
-                        <select className="form-control" aria-label="Default select example"
+                        <select className="form-control"
                         onChange={(e)=>{
                             setSelect(e.target.value);
                         }}

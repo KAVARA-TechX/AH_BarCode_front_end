@@ -47,3 +47,38 @@ select{
   background: none !important;
   border: 1px solid #000 !important;
 }
+
+.btn-float-right{
+float: right;
+}
+
+.contained {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+
+.centered h2{
+  color: #FDF6D8;
+  font-size: 3.625rem;
+  font-weight: 600;
+  font-family: 'serif';
+}
+
+/* Mobile View */
+@media(max-width: 991px){
+  .btn-float-right{
+    float: unset;
+  }
+  .btn-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
