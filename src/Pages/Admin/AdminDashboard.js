@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './styles.css';
+import '../styles.css';
 import {Link} from 'react-router-dom';
 const AdminDashboard = ({ history }) => {
     useEffect(() => {
@@ -20,7 +20,7 @@ const AdminDashboard = ({ history }) => {
     return (
         <div className="d-flex" id="wrapper">
             <div className="border-end bg-white" id="sidebar-wrapper">
-                <div className="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
+                <div className="sidebar-heading border-bottom bg-light">AH International</div>
                 <div className="list-group list-group-flush">
                     <Link to="/admin/add-product" className="list-group-item list-group-item-action list-group-item-light p-3" >Add Product</Link>
                     <Link to="/admin/products" className="list-group-item list-group-item-action list-group-item-light p-3" >Products</Link>

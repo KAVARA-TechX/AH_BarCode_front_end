@@ -1,8 +1,7 @@
-import React,{useState,useEffect} from 'react';
+import React,{useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
-const AdminCreateProduct = ({history}) =>{
-    const [select,setSelect] = useState("");
+const AdminClients = ({history}) =>{
     useEffect(() => {
         if (window.localStorage.getItem("userName") !== "admin") {
             history.push("/admin");
@@ -32,28 +31,21 @@ const AdminCreateProduct = ({history}) =>{
             </div>
             <div id="page-content-wrapper" className="ml-3">
             <i className="fas fa-bars ml-2" id="sidebarToggle" onClick={handleClick}></i>
-
-                <h4 className="mt-4 ml-2">Add Product(s)</h4>        
-                <div class="container-fluid">
-                    <form>
-                    <select className="form-control mb-5" aria-label="Default select example"
-                        onChange={(e)=>{
-                            setSelect(e.target.value);
-                        }}
-                        >
-                                <option >Choose the User Type</option>
-                                <option value="Single Product">Add Single Product</option>
-                                <option value="Excel Sheet">Add Excel Sheet</option>
-                            </select>
-                            {select ==="Single Product" ? "Product Create Form" 
-                            : 
-                            select ==="Excel Sheet" ? 
-                            <div>
-                                <label>Choose File</label>
-                            <input type="file" className="form-control"/> 
-                            </div>:"" }
-                    </form>
-                </div>
+                <h4 className="mt-4 ml-2">Clients</h4>        
+                <table className="table table-bordered">
+                    <thead className="thead-light">
+                        <tr>
+                            <th scope="col">Role</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Company</th>
+                            <th scope="col">Phone no.</th>
+                            <th scope="col">Designation</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Address</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     );
@@ -61,4 +53,4 @@ const AdminCreateProduct = ({history}) =>{
 
 
 
-export default AdminCreateProduct;
+export default AdminClients;

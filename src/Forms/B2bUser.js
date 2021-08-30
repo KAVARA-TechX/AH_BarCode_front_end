@@ -3,6 +3,7 @@ import data from '../states-and-districtsof_india.json';
 import { signup } from '../Functions.js/auth';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 const B2bUser = () => {
     const [name, setName] = useState("");
     const [company, setCompany] = useState("");
@@ -22,6 +23,10 @@ const B2bUser = () => {
         e.preventDefault();
         let address = adrs1+" "+adrs2+","+dis+","+states;
         console.log(name, desg, dep,company, email, phone,address,password);
+        if(name ==="" || email==="" || phone ==="" || dis === "" || 
+        states ==="" || password ==="" || adrs1 === "" || adrs2===""){
+        toast.error("Please fill all the fields");
+    }else{
         signup(name, email, phone, address, password,"retail",company,desg,dep).then((res)=>{
             console.log(res);
             dispatch({
@@ -37,10 +42,8 @@ const B2bUser = () => {
             }
         })
         .catch(err=>console.log(err));
-        setName("");
-        setCompany("");
-        setEmail("");
-        setPhone("");
+    }
+        
     }
     return (
         <div>
@@ -58,7 +61,7 @@ const B2bUser = () => {
                     placeholder="Manager,Cheif..."
                 />
                 <label>Department</label>
-                <select className="form-control" 
+                <select className="form-select" 
                 onChange={(e)=>{setDep(e.target.value)}}>
                     <option>Please Choose a value</option>
                     <option>Owner</option>
@@ -90,16 +93,17 @@ const B2bUser = () => {
                     <label>Address</label>
                     <div className="row">
                         <div className="col-md-6">
-                        <select className="form-control" onChange={(e)=>{setState(e.target.value);}}>
-                    <option>Please Choose your state</option>
+                        <select className="form-select" onChange={(e)=>{setState(e.target.value);}}>
+                    <option>Choose your state</option>
                 {data.states.map(function (object,i) {
                 return <option key={i} value={object.state} >{object.state}</option>
             } )}
                 </select>
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6 mt">
                         {states !== ""}
-                <select disabled={states === ""} className="form-control" onChange={(e)=>{setDis(e.target.value);}}>
+                <select disabled={states === ""} className="form-select" onChange={(e)=>{setDis(e.target.value);}}>
+                    {states === "" ? <option>City</option> :""}
                     {data.states.map(function (object,i){
                         if(object.state === states){
                          return <>

@@ -1,30 +1,31 @@
 import './App.css';
 import {Switch,Route,Link} from 'react-router-dom';
 import Home from './Pages/Home';
-import logo from './Images/brand-white.png';
 import ExistingUser from './Pages/ExistingUser';
 import NewUser from './Pages/NewUser';
 import ScanProduct from './Pages/ScanProducts';
-import AdminRoute from './Pages/AdminRoute';
-import AdminDashboard from './Pages/AdminDashboard';
-import AdminProducts from './Pages/AdminProducts';
-import AdminCreateProduct from './Pages/AdminCreateProduct';
-import AdminOrders from './Pages/AdminOrders';
-import AdminClients from './Pages/AdminClients';
-import { useEffect } from 'react';
+import AdminRoute from './Pages/Admin/AdminRoute';
+import AdminDashboard from './Pages/Admin/AdminDashboard';
+import AdminProducts from './Pages/Admin/AdminProducts';
+import AdminCreateProduct from './Pages/Admin/AdminCreateProduct';
+import AdminOrders from './Pages/Admin/AdminOrders';
+import AdminClients from './Pages/Admin/AdminClients';
+import { ToastContainer } from 'react-toastify';
+import {item} from './Pages/itemList';
 const App = () => {
    //Get current user somehow for storing it in the application
 
    //
   return (
-    <>
-      <Link to="/"><img src={logo} alt="AH International" className="logoImg" /></Link>
-      
+    <>      
+    <ToastContainer/>
     <Switch>
       <Route exact path="/" component={Home}/>
       <Route exact path="/existing-user" component={ExistingUser}/>
       <Route exact path="/new-user" component={NewUser}/>
       <Route exact path="/product-scan" component={ScanProduct}/>
+
+      {/* Admin Routes */}
       <Route exact path="/admin" component={AdminRoute}/>
       <Route exact path="/admin/dashboard" component={AdminDashboard}/>
       <Route exact path="/admin/products" component={AdminProducts} />

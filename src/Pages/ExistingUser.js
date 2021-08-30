@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import B2bUser from '../Forms/B2bUser';
-
+import Nav from '../Nav/HeaderNav';
 const ExistingUser = () =>{
     const [email,setEmail] = useState("");
     const [pwd,setPwd] = useState("");
     const [select,setSelect] = useState("");
     return(
         <div className="mb-5">
+            <Nav/>
             <h3 style={{color:'a7a936'}} className="text-center">Existing User</h3>
             <div className="container-fluid">
                 <div className='row'>
@@ -15,7 +16,7 @@ const ExistingUser = () =>{
                     </div>
                     <div className="col-md-4">
                     <label>User Type</label>
-                        <select className="form-control"
+                        <select className="form-select"
                         onChange={(e)=>{
                             setSelect(e.target.value);
                         }}

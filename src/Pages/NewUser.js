@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import B2bUser from '../Forms/B2bUser';
 import RetailUser from '../Forms/RetailUser';
-
+import Nav from '../Nav/HeaderNav';
 const NewUser = () =>{
     
    
@@ -10,6 +10,7 @@ const NewUser = () =>{
     
     return(
         <div>
+            <Nav/>
             <h3 className="text-center">Register New User</h3>
             <div className='container-fluid'>
                 <div className="row">
@@ -18,7 +19,7 @@ const NewUser = () =>{
                     </div>
                     <div className="col-md-4">
                         <label>User Type</label>
-                        <select className="form-control" aria-label="Default select example"
+                        <select className="form-select" aria-label="Default select example"
                         onChange={(e)=>{
                             setSelect(e.target.value);
                         }}

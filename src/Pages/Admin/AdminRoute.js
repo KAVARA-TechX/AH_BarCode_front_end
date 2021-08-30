@@ -24,7 +24,7 @@ return(
         <label>Enter userName</label>
         <input className="form-control" onChange={e=> setUsername(e.target.value)} />
         <label>Enter password</label>
-        <input className="form-control" onChange={e=> setPassword(e.target.value)} />
+        <input type="password" className="form-control" onChange={e=> setPassword(e.target.value)} />
         <button className="button mt-3">Login</button>
     </form>
     <div className="col-md-3"></div>

@@ -1,6 +1,8 @@
-import React,{useEffect} from 'react';  
+import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
-const AdminProducts = ({history}) =>{
+
+const AdminCreateProduct = ({history}) =>{
+    const [select,setSelect] = useState("");
     useEffect(() => {
         if (window.localStorage.getItem("userName") !== "admin") {
             history.push("/admin");
@@ -25,19 +27,38 @@ const AdminProducts = ({history}) =>{
                     <Link to="/admin/products"    className="list-group-item list-group-item-action list-group-item-light p-3" >Products</Link>
                     <Link to="/admin/orders"      className="list-group-item list-group-item-action list-group-item-light p-3" >Orders</Link>
                     <Link to="/admin/clients"     className="list-group-item list-group-item-action list-group-item-light p-3" >Clients</Link>
-                    <Link  className="list-group-item list-group-item-action list-group-item-light p-3" onClick={handleLogout} >Logout</Link>
+                    <Link className="list-group-item list-group-item-action list-group-item-light p-3" onClick={handleLogout} >Logout</Link>
                 </div>
             </div>
             <div id="page-content-wrapper" className="ml-3">
             <i className="fas fa-bars ml-2" id="sidebarToggle" onClick={handleClick}></i>
-            <button className="float-right btn btn-primary" id="sidebarToggle">Import Excel Sheet</button>
-                <h4 className="mt-4 ml-2">All Products</h4>        
+
+                <h4 className="mt-4 ml-2">Add Product(s)</h4>        
                 <div class="container-fluid">
-                    Products
+                    <form>
+                    <select className="form-select mb-5" aria-label="Default select example"
+                        onChange={(e)=>{
+                            setSelect(e.target.value);
+                        }}
+                        >
+                                <option >Choose the User Type</option>
+                                <option value="Single Product">Add Single Product</option>
+                                <option value="Excel Sheet">Add Excel Sheet</option>
+                            </select>
+                            {select ==="Single Product" ? "Product Create Form" 
+                            : 
+                            select ==="Excel Sheet" ? 
+                            <div>
+                                <label>Choose File</label>
+                            <input type="file" className="form-control"/> 
+                            </div>:"" }
+                    </form>
                 </div>
             </div>
         </div>
     );
 }
 
-export default AdminProducts;
+
+
+export default AdminCreateProduct;

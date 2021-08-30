@@ -1,7 +1,6 @@
-import React,{useEffect} from 'react';
+import React,{useEffect} from 'react';  
 import {Link} from 'react-router-dom';
-
-const AdminClients = ({history}) =>{
+const AdminProducts = ({history}) =>{
     useEffect(() => {
         if (window.localStorage.getItem("userName") !== "admin") {
             history.push("/admin");
@@ -26,28 +25,19 @@ const AdminClients = ({history}) =>{
                     <Link to="/admin/products"    className="list-group-item list-group-item-action list-group-item-light p-3" >Products</Link>
                     <Link to="/admin/orders"      className="list-group-item list-group-item-action list-group-item-light p-3" >Orders</Link>
                     <Link to="/admin/clients"     className="list-group-item list-group-item-action list-group-item-light p-3" >Clients</Link>
-                    <Link className="list-group-item list-group-item-action list-group-item-light p-3" onClick={handleLogout} >Logout</Link>
+                    <Link  className="list-group-item list-group-item-action list-group-item-light p-3" onClick={handleLogout} >Logout</Link>
                 </div>
             </div>
             <div id="page-content-wrapper" className="ml-3">
             <i className="fas fa-bars ml-2" id="sidebarToggle" onClick={handleClick}></i>
-                <h4 className="mt-4 ml-2">Clients</h4>        
+            <button className="float-right button" id="sidebarToggle">Export Excel Sheet</button>
+                <h4 className="mt-4 ml-2">All Products</h4>        
                 <div class="container-fluid">
-                <table className="table table-bordered">
-                    <thead className="thead-light">
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Phone no.</th>
-                        </tr>
-                    </thead>
-                </table>
+                    Products
                 </div>
             </div>
         </div>
     );
 }
 
-
-
-export default AdminClients;
+export default AdminProducts;

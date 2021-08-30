@@ -1,15 +1,15 @@
 import React,{useState,useEffect} from 'react';
 import QrReader from 'react-qr-reader';
 import { useSelector } from 'react-redux';
-
+import Nav from "../Nav/HeaderNav";
 const ScanProduct = ({history}) =>{
   const [scanResultWebCam, setScanResultWebCam] =  useState('');
   const {user} = useSelector((state)=>({...state}));
-  useEffect(()=>{
-      if(user === null){
-          history.push("/existing-user");
-      }
-  },[]);
+//   useEffect(()=>{
+//       if(user === null){
+//           history.push("/existing-user");
+//       }
+//   },[]);
     const handleErrorWebCam = (error) => {
         console.log(error);
       }
@@ -24,7 +24,8 @@ const ScanProduct = ({history}) =>{
        }
     return(
         <div className="container">
-            <h3>Scan Products <button className="btn btn-primary float-right">Confirm</button></h3>
+            <Nav/>
+            <h3>Scan Products</h3>
 
             <div className="row">
                 <div className="col-md-4"></div>
@@ -34,24 +35,23 @@ const ScanProduct = ({history}) =>{
                     onError={handleErrorWebCam}
                     onScan={handleScanWebCam}
                     />
-                    <h3>{scanResultWebCam}</h3>
                 </div>
                 <div className="col-md-5"></div>
             </div>
             {scanResultWebCam !== '' ? <div className="mt-5">
                 <div className="card">
-                    <div className="card-header">
-                        Model Number:-
-                    </div>
                     <div className="card-body">
-                        Price:-
+                        
+                    Brand
                         <br/>
-                        Brand:-
+                        Model No
                         <br/>
-                        <span>quantity:- <input type ="number" className="form-control"/></span>
+                        Price
+                        <br/>
+                        <span>Quantity:- <input type ="number" placeholder="Enter Quantity" className="form-control"/></span>
                     </div>
                     <div className="card-footer">
-                        <button className="btn btn-primary" onClick={handleAddToList}>Add to list</button>
+                        <button className="button" onClick={handleAddToList}>Add to list</button>
                     </div>
                 </div>
             </div> : ""}
