@@ -6,7 +6,7 @@ const ExistingUser = () =>{
     const [pwd,setPwd] = useState("");
     const [select,setSelect] = useState("");
     return(
-        <div >
+        <div className="mb-5">
             <h3 style={{color:'a7a936'}} className="text-center">Existing User</h3>
             <div className="container-fluid">
                 <div className='row'>

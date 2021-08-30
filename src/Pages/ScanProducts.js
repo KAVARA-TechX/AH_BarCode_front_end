@@ -1,9 +1,15 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import QrReader from 'react-qr-reader';
+import { useSelector } from 'react-redux';
 
-const ScanProduct = () =>{
+const ScanProduct = ({history}) =>{
   const [scanResultWebCam, setScanResultWebCam] =  useState('');
-
+  const {user} = useSelector((state)=>({...state}));
+  useEffect(()=>{
+      if(user === null){
+          history.push("/existing-user");
+      }
+  },[]);
     const handleErrorWebCam = (error) => {
         console.log(error);
       }

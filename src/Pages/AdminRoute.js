@@ -4,12 +4,13 @@ const AdminRoute = ({history}) =>{
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
 const handleSubmit = (e) =>{
+    console.log(password);;
     e.preventDefault();
     if(username === "" && password === ""){
         alert("Please Enter both the fields");
-    }else if (username !== "admin" && password !== "admin"){
+    }else if (username !== "admin" || password !== "admin"){
         alert("Invalid Credentials");
-    }else if(window.localStorage.getItem("usernNme") === null){
+    }else if(window.localStorage.getItem("userName") === null){
         window.localStorage.setItem("userName",username);
         history.push("/admin/dashboard");
     }

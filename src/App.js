@@ -11,8 +11,11 @@ import AdminProducts from './Pages/AdminProducts';
 import AdminCreateProduct from './Pages/AdminCreateProduct';
 import AdminOrders from './Pages/AdminOrders';
 import AdminClients from './Pages/AdminClients';
+import { useEffect } from 'react';
 const App = () => {
-   
+   //Get current user somehow for storing it in the application
+
+   //
   return (
     <>
       <Link to="/"><img src={logo} alt="AH International" className="logoImg" /></Link>
@@ -28,7 +31,6 @@ const App = () => {
       <Route exact path="/admin/add-product" component={AdminCreateProduct} />
       <Route exact path="/admin/orders" component={AdminOrders} />
       <Route exact path="/admin/clients" component={AdminClients} />
-
     </Switch>
     </>
   );

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import data from '../states-and-districtsof_india.json';
-
+import { signup } from '../Functions.js/auth';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 const B2bUser = () => {
     const [name, setName] = useState("");
     const [company, setCompany] = useState("");
@@ -10,9 +12,31 @@ const B2bUser = () => {
     const [dep,setDep] = useState("");
     const [states,setState] = useState("");
     const [dis,setDis] = useState("");
+    const [adrs1,setAdrs1] = useState("");
+    const [adrs2,setAdrs2] = useState("");
+    const [password,setPassword] = useState("");
+    
+    let history = useHistory();
+    let dispatch = useDispatch();
     const onHandleSumbit = (e) => {
         e.preventDefault();
-        console.log(name, email, company, phone,dep,desg);
+        let address = adrs1+" "+adrs2+","+dis+","+states;
+        console.log(name, desg, dep,company, email, phone,address,password);
+        signup(name, email, phone, address, password,"retail",company,desg,dep).then((res)=>{
+            console.log(res);
+            dispatch({
+                type:"LOGGED_IN_USER",
+                payload:{
+                    name: name,
+                    email:email,
+                    role:"b2b"
+                }
+            });
+            if(typeof res === 'undefined'){
+                history.push("/product-scan");
+            }
+        })
+        .catch(err=>console.log(err));
         setName("");
         setCompany("");
         setEmail("");
@@ -89,9 +113,25 @@ const B2bUser = () => {
                         </div>
                     </div>
                 <br/>
-                <input className="form-control" placeholder="Address Line 1"/>
+                <input 
+                    className="form-control" 
+                    value={adrs1} 
+                    onChange={(e)=>setAdrs1(e.target.value)} 
+                    placeholder="Address Line 1"/>
                 <br/>
-                <input className="form-control" placeholder="Address Line 2"/>
+                <input 
+                className="form-control" 
+                value={adrs2} 
+                onChange={(e)=>setAdrs2(e.target.value)} 
+                placeholder="Address Line 2"/>
+                <label>Password</label>
+                <input
+                    className="form-control"
+                    type="password"
+                    value={password}
+                    placeholder="********"
+                    onChange={e => setPassword(e.target.value)}
+                />
                 <button className="button mt-3">Submit</button>
             </form>
         </div>
