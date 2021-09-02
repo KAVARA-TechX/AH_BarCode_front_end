@@ -1,23 +1,34 @@
 import React,{useEffect, useState} from 'react';
 import logo from '../Images/brand-white.png';
+import { useDispatch, useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
 const Nav = () =>{
     const [loading,setLoading] = useState(false);
+
+    const {user} = useSelector((state)=>({state}));
     useEffect(()=>{
-        if( window.location.href === "http://localhost:8081/product-scan"){
+        if( window.location.href === "http://localhost:8081/product-scan" || user !== null){
             setLoading(true);
         }else{
             setLoading(false);
         }
     });
+
+    let dispatch = useDispatch();
+    const handleLogout = () =>{
+        dispatch({
+            type: 'LOGOUT',
+            payload:null
+          }); 
+    }
     return(
         <>
         {loading ? <div style={{display:'inline'}}>
         <Link to="/"><img src={logo} alt="AH International" className="logoImg" /></Link>
-
             <div className="options">
+            <a style={{color:"#000",cursor:'pointer',paddingRight:'10px'}} onClick={handleLogout}>Logout</a>
             <Link style={{color:"#000"}} to="/store"><i style={{fontSize:'30px'}} className="fas fa-book"></i></Link>
-            <Link style={{color:"#000"}} to="/item-list"><i style={{fontSize:'32px'}} className="fas fa-clipboard-list"></i></Link>
+            <Link style={{color:"#000"}} to="/cart"><i style={{fontSize:'32px'}} className="fas fa-clipboard-list"></i></Link>
             </div>
         </div>:
         <Link to="/"><img src={logo} alt="AH International" className="logoImg" /></Link>

@@ -11,7 +11,8 @@ import AdminCreateProduct from './Pages/Admin/AdminCreateProduct';
 import AdminOrders from './Pages/Admin/AdminOrders';
 import AdminClients from './Pages/Admin/AdminClients';
 import { ToastContainer } from 'react-toastify';
-import {item} from './Pages/itemList';
+import item from './Pages/itemList';
+import Cart from './Pages/Cart';
 const App = () => {
    //Get current user somehow for storing it in the application
 
@@ -32,6 +33,9 @@ const App = () => {
       <Route exact path="/admin/add-product" component={AdminCreateProduct} />
       <Route exact path="/admin/orders" component={AdminOrders} />
       <Route exact path="/admin/clients" component={AdminClients} />
+      <Route exact path="/cart" component={Cart} />
+      <Route exact path="/store" component={item} />
+
     </Switch>
     </>
   );

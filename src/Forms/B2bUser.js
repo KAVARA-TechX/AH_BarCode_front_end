@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import data from '../states-and-districtsof_india.json';
-import { signup } from '../Functions.js/auth';
+import { signup } from '../Functions/auth';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';

@@ -1,12 +1,37 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import B2bUser from '../Forms/B2bUser';
+import { signin } from '../Functions/auth';
 import Nav from '../Nav/HeaderNav';
-const ExistingUser = () =>{
-    const [email,setEmail] = useState("");
+import { useDispatch } from 'react-redux';
+const ExistingUser = ({history}) =>{
+    const [name,setName] = useState("");
     const [pwd,setPwd] = useState("");
     const [select,setSelect] = useState("");
+
+    let dispatch = useDispatch();
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        console.log(name,pwd);
+        signin(name,pwd).then((res)=>{
+            console.log(res.data.name);
+            dispatch({
+                type:"LOGGED_IN_USER",
+                payload:{
+                    name: res.data.name,
+                    email:res.data.email,
+                    role:"b2b"
+                }
+            });
+            history.push("/product-scan");
+        }).catch(err=>{
+            console.log(err);
+            toast.error("Invalid User");
+        });
+    }
     return(
-        <div className="mb-5">
+        <div className="container mb-5">
             <Nav/>
             <h3 style={{color:'a7a936'}} className="text-center">Existing User</h3>
             <div className="container-fluid">
@@ -30,14 +55,14 @@ const ExistingUser = () =>{
                             <B2bUser/>
                             :
                             select === "Retail" ? 
-                                <form>
+                                <form onSubmit={handleSubmit}>
                                 <label>Email address</label>
                             <input className="form-control"
-                            value={email} 
-                            onChange={e=>setEmail(e.target.value)}
+                            value={name} 
+                            onChange={e=>setName(e.target.value)}
                             placeholder="email@address.com" />
                             <label>Password</label>
-                            <input className="form-control"
+                            <input type="password" className="form-control"
                             value={pwd} 
                             onChange={e=>setPwd(e.target.value)}
                             placeholder="xxxxxxxxx" />

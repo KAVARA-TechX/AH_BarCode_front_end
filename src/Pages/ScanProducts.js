@@ -5,11 +5,11 @@ import Nav from "../Nav/HeaderNav";
 const ScanProduct = ({history}) =>{
   const [scanResultWebCam, setScanResultWebCam] =  useState('');
   const {user} = useSelector((state)=>({...state}));
-//   useEffect(()=>{
-//       if(user === null){
-//           history.push("/existing-user");
-//       }
-//   },[]);
+  useEffect(()=>{
+      if(user === null){
+          history.push("/existing-user");
+      }
+  },[user]);
     const handleErrorWebCam = (error) => {
         console.log(error);
       }
