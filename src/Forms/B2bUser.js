@@ -58,7 +58,7 @@ const B2bUser = () => {
                 <input className="form-control"
                     value={desg}
                     onChange={e => setDesg(e.target.value)}
-                    placeholder="Manager,Cheif..."
+                    placeholder="Manager,Chef..."
                 />
                 <label>Department</label>
                 <select className="form-select" 
@@ -79,7 +79,7 @@ const B2bUser = () => {
                 <input className="form-control"
                     value={company}
                     onChange={e => setCompany(e.target.value)}
-                    placeholder="ABCD Inc" />
+                    placeholder="AH International" />
                 <label>Email address</label>
                 <input className="form-control"
                     value={email}
@@ -89,7 +89,7 @@ const B2bUser = () => {
                 <input className="form-control"
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
-                    placeholder="(+123)-45678901" />
+                    placeholder="(+91)7894523169" />
                     <label>Address</label>
                     <div className="row">
                         <div className="col-md-6">

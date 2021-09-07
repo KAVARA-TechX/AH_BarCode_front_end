@@ -1,13 +1,11 @@
 import React,{useEffect, useState} from 'react';
 import logo from '../Images/brand-white.png';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {Link} from 'react-router-dom';
 const Nav = () =>{
     const [loading,setLoading] = useState(false);
-
-    const {user} = useSelector((state)=>({state}));
     useEffect(()=>{
-        if( window.location.href === "http://localhost:8081/product-scan" || user !== null){
+        if( window.location.href === "http://localhost:8081/product-scan" ){
             setLoading(true);
         }else{
             setLoading(false);
