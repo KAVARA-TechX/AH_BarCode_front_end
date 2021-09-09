@@ -15,10 +15,11 @@ const ExistingUser = ({history}) =>{
         e.preventDefault();
         console.log(name,pwd);
         signin(name,pwd).then((res)=>{
-            console.log(res.data.name);
+            // console.log(res.data);
             dispatch({
                 type:"LOGGED_IN_USER",
                 payload:{
+                    id: res.data.id,
                     name: res.data.name,
                     email:res.data.email,
                     role:"b2b"

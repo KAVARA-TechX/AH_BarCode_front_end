@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import QrReader from 'react-qr-reader';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { getProductById } from '../Functions/products';
 import Nav from "../Nav/HeaderNav";
 const ScanProduct = ({ history }) => {
     const [scanResultWebCam, setScanResultWebCam] = useState('');
-    const { user } = useSelector((state) => ({ ...state }));
+    const [product,SetProduct] = useState({});
+    const { user,list } = useSelector((state) => ({ ...state }));
     //   useEffect(()=>{
     //       if(user === null){
     //           history.push("/existing-user");
     //       }
     //   },[user]);
+    useEffect(()=>{
+        getProductById(scanResultWebCam).then((res)=>{
+            console.log(res.data.product);
+            SetProduct(res.data.product);
+        }).catch(err=>console.log(err));
+    },[scanResultWebCam]);
+    let dispatch = useDispatch();
     const handleErrorWebCam = (error) => {
         console.log(error);
     }
@@ -18,11 +27,19 @@ const ScanProduct = ({ history }) => {
             setScanResultWebCam(result);
         }
     }
+    var productsList = [];
+    if(list.length != 0){
+        productsList.push(...list);
+    }
+    productsList.push(product);
     const handleAddToList = (e) => {
         e.preventDefault();
+        dispatch({
+            type:"ADD_TO_LIST",
+            payload:productsList
+        });
         setScanResultWebCam('');
     }
-
     return (
         <div className="container">
             <Nav />
@@ -45,11 +62,11 @@ const ScanProduct = ({ history }) => {
                 <div className="card">
                     <div className="card-body">
 
-                        Brand
+                        Batch number {product.batchNumber}
                         <br />
-                        Model No
+                        Model No {product._id}
                         <br />
-                        Price
+                        Price {product.sellingPrice}
                         <br />
                         <span>Quantity:- <input type="number" placeholder="Enter Quantity" className="form-control" /></span>
                     </div>
