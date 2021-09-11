@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import * as XLSX from "xlsx";
+import { createProducts } from '../../Functions/products';
 const AdminCreateProduct = ({history}) =>{
     const [select,setSelect] = useState("");
     const [products,setProducts] = useState([]);
@@ -45,13 +46,24 @@ const AdminCreateProduct = ({history}) =>{
         });
     
         promise.then((d) => {
+            console.log(d);
             setProducts(d);
         });
       };
 
       const handleSubmit = (e) =>{
           e.preventDefault();
+          products.map((p)=>{
+              if(p.batch === "N"){
+                  p.batch = false;
+                  
+              }
+              if(p.inventory === "Y"){
+                  p.inventory = true;
+              }
+          });
           console.log(products);
+          createProducts(products).then((res)=>console.log(res)).catch(err=>console.log(err));
       }
     return(
         <div className="d-flex" id="wrapper">
@@ -87,6 +99,7 @@ const AdminCreateProduct = ({history}) =>{
                                 <label>Choose File</label>
                                 <input
         type="file"
+        className="form-control"
         onChange={(e) => {
           console.log(e.target.files[0]);
           const file = e.target.files[0];

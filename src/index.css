@@ -156,3 +156,8 @@ margin-left: 10px;
   text-decoration: none;
   cursor: pointer;
 }
+
+.scrollbar{
+  overflow-y: auto;
+  white-space: nowrap;
+}

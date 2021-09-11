@@ -6,6 +6,7 @@ import Nav from "../Nav/HeaderNav";
 const ScanProduct = ({ history }) => {
     const [scanResultWebCam, setScanResultWebCam] = useState('');
     const [product,SetProduct] = useState({});
+    const [quantity,setQuantity] = useState();
     const { user,list } = useSelector((state) => ({ ...state }));
     //   useEffect(()=>{
     //       if(user === null){
@@ -34,11 +35,13 @@ const ScanProduct = ({ history }) => {
     productsList.push(product);
     const handleAddToList = (e) => {
         e.preventDefault();
+        console.log(quantity);
         dispatch({
             type:"ADD_TO_LIST",
             payload:productsList
         });
         setScanResultWebCam('');
+        setQuantity();
     }
     return (
         <div className="container">
@@ -68,7 +71,10 @@ const ScanProduct = ({ history }) => {
                         <br />
                         Price {product.sellingPrice}
                         <br />
-                        <span>Quantity:- <input type="number" placeholder="Enter Quantity" className="form-control" /></span>
+                        <span>Quantity:- <input type="number" 
+                        value={quantity}
+                        onChange={e=>setQuantity(e.target.value)}
+                        placeholder="Enter Quantity" className="form-control" /></span>
                     </div>
                     <div className="card-footer">
                         <button className="button close-modal" onClick={handleAddToList}>Add to list</button>

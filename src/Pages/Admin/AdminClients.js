@@ -1,11 +1,14 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
+import { getUsers } from '../../Functions/auth';
 
 const AdminClients = ({history}) =>{
+    const [users,setUsers] = useState([]);
     useEffect(() => {
         if (window.localStorage.getItem("userName") !== "admin") {
             history.push("/admin");
         }
+        getUsers().then((res)=>setUsers(res.data.users)).catch(err=>console.log(err));
     },);
     const handleClick = (e) =>{
         e.preventDefault();
@@ -29,7 +32,7 @@ const AdminClients = ({history}) =>{
                     <Link className="list-group-item list-group-item-action list-group-item-light p-3" onClick={handleLogout} >Logout</Link>
                 </div>
             </div>
-            <div id="page-content-wrapper" className="ml-3">
+            <div id="page-content-wrapper" className="ml-3 scrollbar">
             <i className="fas fa-bars ml-2" id="sidebarToggle" onClick={handleClick}></i>
                 <h4 className="mt-4 ml-2">Clients</h4>        
                 <table className="table table-bordered">
@@ -44,6 +47,18 @@ const AdminClients = ({history}) =>{
                             <th scope="col">Department</th>
                             <th scope="col">Address</th>
                         </tr>
+                        {users.map((users)=>(
+                                <tr>
+                                    <td>{users.roles[0]}</td>
+                                    <td>{users.name}</td>
+                                    <td>{users.email}</td>
+                                    <td></td>
+                                    <td>{users.phoneNumber}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>{users.address}</td>
+                                </tr>    
+                        ))}
                     </thead>
                 </table>
             </div>

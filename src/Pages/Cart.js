@@ -20,20 +20,27 @@ const Cart = () =>{
         productsList.push(...list);
     }
     dispatch({
-        type:"ADD_TO_LIST",
+        type:"REMOVE_FROM_LIST",
         payload:productsList
     });
     }
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        createOrder(productsList).then((res)=>{
+        console.log(list);
+        createOrder(list,user._id).then((res)=>{
+            console.log(res);
+            dispatch({
+                type:"EMPTY_LIST",
+                payload:[]
+            });
             toast.success("Order Has been placed");
         }).catch(err=>console.log(err));
     }
     return(
         <div className="container">
             <Nav/>
+            <h4 className="text-center" >Cart</h4>
             {list.map((product)=>(
                 <div key={product._id} className="card mt-3">
                 <div className="card-body">
@@ -41,7 +48,7 @@ const Cart = () =>{
                 </div>
             </div>
             ))}
-            {list.length !== 0 ? <button className="button mt-3" onClick={handleSubmit}>Submit Order</button> :""}
+            {list.length !== 0 ? <button className="button mt-3" onClick={handleSubmit}>Submit Order</button> :<p className="text-center">Your cart is empty.</p>}
         </div>
     );
 }

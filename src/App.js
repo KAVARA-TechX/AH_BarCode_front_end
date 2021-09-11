@@ -35,6 +35,8 @@ const App = () => {
       <Route exact path="/admin/add-product" component={AdminCreateProduct} />
       <Route exact path="/admin/orders" component={AdminOrders} />
       <Route exact path="/admin/clients" component={AdminClients} />
+      
+      {/* user route */}
       <Route exact path="/cart" component={Cart} />
       <Route exact path="/store" component={item} />
 

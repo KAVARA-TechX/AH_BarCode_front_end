@@ -1,12 +1,21 @@
 import React,{useEffect} from 'react';
+import { useState } from 'react';
 import {Link} from 'react-router-dom';
+import { getOrders } from '../../Functions/orders';
 
 const AdminOrders = ({history}) =>{
+    const [orders,setOrders] = useState([]);
     useEffect(() => {
         if (window.localStorage.getItem("userName") !== "admin") {
             history.push("/admin");
         }
-    },);
+        getOrders().then((res)=>setOrders(res.data)).catch(err=>console.log(err));
+    },[]);
+    const Orders = () =>{
+        setTimeout(()=>{
+            // getOrders().then((res)=>setOrders(res.data)).catch(err=>console.log(err));
+        },5000)
+    }
     const handleClick = (e) =>{
         e.preventDefault();
         document.body.classList.toggle('sb-sidenav-toggled');
@@ -19,6 +28,7 @@ const AdminOrders = ({history}) =>{
     }
     return(
         <div className="d-flex" id="wrapper">
+            {console.log(orders)}
             <div className="border-end bg-white" id="sidebar-wrapper">
                 <div className="sidebar-heading border-bottom bg-light">AH International</div>
                 <div className="list-group list-group-flush">
@@ -36,12 +46,19 @@ const AdminOrders = ({history}) =>{
                 <table className="table table-bordered">
                     <thead className="thead-light">
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Model Number</th>
-                            <th scope="col">Brand</th>
+                            <th scope="col">Order_Id</th>
+                            <th scope="col">Product List/quantity</th>
+                            <th scope="col">Ordered At</th>
                         </tr>
+                        {orders.map((order)=>(
+                                <tr>
+                                <td>{order._id}</td>
+                                <td><ul>{order.products !== undefined && order.products.length > 0?order.products.map((product)=>(
+                                    <li>{product.productId}</li>
+                                )) : "No list"}</ul></td>
+                                <td>{order.createdAt}</td>
+                                </tr>    
+                        ))}
                     </thead>
                 </table>
                 </div>
