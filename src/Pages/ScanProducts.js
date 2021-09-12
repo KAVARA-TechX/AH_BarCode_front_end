@@ -36,6 +36,8 @@ const ScanProduct = ({ history }) => {
     const handleAddToList = (e) => {
         e.preventDefault();
         console.log(quantity);
+        product.quantityBought = quantity;
+        console.log(product.quantityBought);
         dispatch({
             type:"ADD_TO_LIST",
             payload:productsList

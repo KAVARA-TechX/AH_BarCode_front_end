@@ -47,16 +47,20 @@ const AdminOrders = ({history}) =>{
                     <thead className="thead-light">
                         <tr>
                             <th scope="col">Order_Id</th>
-                            <th scope="col">Product List/quantity</th>
-                            <th scope="col">Ordered At</th>
+                            <th scope="col">Product list/quantity</th>
+                            <th scope="col">Total amount</th>
+                            <th scope="col">Discount</th>
+                            <th scope="col">Ordered at</th>
                         </tr>
                         {orders.map((order)=>(
                                 <tr>
                                 <td>{order._id}</td>
                                 <td><ul>{order.products !== undefined && order.products.length > 0?order.products.map((product)=>(
-                                    <li>{product.productId}</li>
-                                )) : "No list"}</ul></td>
-                                <td>{order.createdAt}</td>
+                                    <li>{product.productId}{typeof product.quantityBought !== 'undefined' ? ` / ${product.quantityBought}`:""}</li>
+                                )) : "No products or quantity"}</ul></td>
+                                <td>{typeof order.totalAmount !=='undefined' ? order.totalAmount :0}</td>
+                                <td>{typeof order.discount !=='undefined' ? order.discount :0}</td>
+                                <td>on {new Date(order.createdAt).toLocaleDateString()} at {new Date(order.createdAt).toLocaleTimeString()}</td>
                                 </tr>    
                         ))}
                     </thead>

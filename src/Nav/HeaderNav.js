@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 const Nav = () =>{
     const [loading,setLoading] = useState(false);
     useEffect(()=>{
-        if( window.location.href === "http://localhost:8081/product-scan" ){
+        if( window.location.href === "http://localhost:3000/product-scan" ){
             setLoading(true);
         }else{
             setLoading(false);

@@ -1,10 +1,13 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { createOrder } from '../Functions/orders';
 import Nav from '../Nav/HeaderNav';
 
 const Cart = () =>{
+    
+    const [totalAmount,setTotalAmount] = useState(0);
+    const [discount,setDiscount] = useState(0);
     var productsList = [];
     const{user,list} = useSelector((state)=>({...state}));
     let dispatch = useDispatch();
@@ -28,7 +31,11 @@ const Cart = () =>{
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log(list);
-        createOrder(list,user._id).then((res)=>{
+        list.map((p)=>{
+            setTotalAmount(totalAmount + p.sellingPrice); 
+        });
+        console.log(totalAmount);
+        createOrder(list,user._id,totalAmount,discount).then((res)=>{
             console.log(res);
             dispatch({
                 type:"EMPTY_LIST",
