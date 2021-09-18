@@ -15,3 +15,12 @@ export const signin = async(name,password) =>{
 export const getUsers = async()=>{
     return await axios.get("https://ahinternationals.herokuapp.com/api/all");
 }
+
+export const getB2BUsers = async()=>{
+    return await axios.get("https://ahinternationals.herokuapp.com/api/B2B");
+}
+
+export const getRetailUsers = async()=>{
+    return await axios.get("https://ahinternationals.herokuapp.com/api/retail");
+}
+
